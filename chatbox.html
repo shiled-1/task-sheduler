@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Chat</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .chat-container {
+            height: calc(100vh - 120px);
+            display: flex;
+        }
+        
+        .chat-sidebar {
+            width: 250px;
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+        }
+        
+        .chat-contacts {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .chat-contact {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .chat-contact:hover, .chat-contact.active {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-name {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .contact-role {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message {
+            max-width: 70%;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .message-received {
+            align-self: flex-start;
+            background-color: #f0f0f0;
+            border-top-left-radius: 0;
+        }
+        
+        .message-sent {
+            align-self: flex-end;
+            background-color: var(--primary-color);
+            color: white;
+            border-top-right-radius: 0;
+        }
+        
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .chat-input {
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-muted);
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <i class="fas fa-tasks"></i>
+                <span>TaskFlow Chat</span>
+            </div>
+            <div class="header-actions">
+                <a href="#" id="back-to-dashboard" class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </header>
+        
+        <main class="chat-container">
+            <div class="chat-sidebar">
+                <div class="section-header" style="padding: 15px;">
+                    <h3>Conversations</h3>
+                </div>
+                <ul class="chat-contacts" id="chat-contacts">
+                    <!-- Contacts will be added dynamically -->
+                </ul>
+            </div>
+            
+            <div class="chat-main">
+                <div id="empty-chat" class="empty-state">
+                    <i class="fas fa-comments"></i>
+                    <h3>Select a contact to start chatting</h3>
+                    <p>Choose a colleague from the list to begin a conversation</p>
+                </div>
+                
+                <div id="chat-view" style="display: none; height: 100%; display: flex; flex-direction: column;">
+                    <div class="chat-header">
+                        <div class="contact-avatar" id="chat-avatar"></div>
+                        <div class="contact-details">
+                            <div class="contact-name" id="chat-name"></div>
+                            <div class="contact-role" id="chat-role"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Messages will be added dynamically -->
+                    </div>
+                    
+                    <div class="chat-input">
+                        <input type="text" id="message-input" placeholder="Type your message...">
+                        <button class="btn btn-primary" id="send-message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/auth.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+</html>

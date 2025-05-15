@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Team Member Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="logo">
+                <i class="fas fa-tasks"></i>
+                <span>Team Member: <span id="member-name"></span></span>
+            </div>
+            <div class="header-actions">
+                <a href="#" id="chat-icon" class="icon-btn">
+                    <i class="fas fa-comments"></i>
+                </a>
+                <a href="#" id="logout-btn" class="btn btn-outline">Logout</a>
+            </div>
+        </header>
+        
+        <main class="dashboard-content">
+            <div class="dashboard-sidebar">
+                <ul class="sidebar-menu">
+                    <li class="active"><a href="#my-tasks"><i class="fas fa-clipboard-list"></i> My Tasks</a></li>
+                    <li><a href="#completed"><i class="fas fa-check-double"></i> Completed</a></li>
+                </ul>
+            </div>
+            
+            <div class="dashboard-main">
+                <section id="task-section">
+                    <div class="section-header">
+                        <h2>My Tasks</h2>
+                    </div>
+                    
+                    <div class="task-filters">
+                        <div class="filter-group">
+                            <label for="filter-status">Status:</label>
+                            <select id="filter-status">
+                                <option value="">All</option>
+                                <option value="not-started">Not Started</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="tasks-container" id="tasks-list">
+                        <!-- Task items will be added dynamically -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Task Update Modal -->
+    <div id="task-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Update Task Status</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="task-form">
+                    <div class="form-group">
+                        <label for="task-title">Title</label>
+                        <input type="text" id="task-title" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-description">Description</label>
+                        <textarea id="task-description" rows="3" readonly></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-status">Status</label>
+                        <select id="task-status" required>
+                            <option value="not-started">Not Started</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="task-comment">Comment (Optional)</label>
+                        <textarea id="task-comment" rows="2"></textarea>
+                    </div>
+                    <input type="hidden" id="task-id">
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline" id="cancel-task">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update Task</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/member.js"></script>
+</body>
+</html>

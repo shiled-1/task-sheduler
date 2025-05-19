@@ -173,7 +173,7 @@ function checkAuthStatus() {
 }
 
 // Setup login form
-function setupLoginForm() {
+function setupForm() {
     const loginForm = document.getElementById('login-form');
     const loginError = document.getElementById('login-error');
     
